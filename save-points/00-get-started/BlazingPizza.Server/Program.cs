@@ -13,7 +13,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaStoreContext>(options =>
         options.UseSqlite("Data Source=pizza.db"));
 
-builder.Services.AddDefaultIdentity<PizzaStoreUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<PizzaStoreUser>(options => {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequireNonAlphanumeric = false;
+    })
         .AddEntityFrameworkStores<PizzaStoreContext>();
 
 builder.Services.AddIdentityServer()
